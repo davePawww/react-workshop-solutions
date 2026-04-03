@@ -32,7 +32,9 @@ export default defineConfig([
       'import/resolver': { typescript: true },
     },
     rules: {
+      // eslint-plugin-react
       'react/react-in-jsx-scope': 'off',
+      // eslint-plugin-import
       'import/no-duplicates': 'error',
       'import/no-cycle': 'warn',
       'import/order': [
@@ -48,6 +50,16 @@ export default defineConfig([
           alphabetize: { order: 'asc' },
         },
       ],
+      // typescript
+      '@typescript-eslint/no-unused-vars': [
+        'error',
+        { argsIgnorePattern: '^_' },
+      ],
+      '@typescript-eslint/consistent-type-imports': 'error',
+      '@typescript-eslint/no-explicit-any': 'warn',
+      'no-console': 'warn',
+      eqeqeq: 'error',
+      'no-debugger': 'error',
     },
   },
 ]);
