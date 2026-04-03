@@ -73,9 +73,21 @@ export default defineConfig([
       },
       // eslint plugin import
       'import/resolver': {
-        typescript: true,
+        typescript: {
+          project: './tsconfig.json',
+        },
         node: true,
       },
+    },
+  },
+  {
+    files: ['src/components/ui/**/*.{ts,tsx}'],
+    rules: {
+      '@typescript-eslint/no-unsafe-assignment': 'off',
+      '@typescript-eslint/no-unsafe-call': 'off',
+      '@typescript-eslint/no-unsafe-member-access': 'off',
+      '@typescript-eslint/no-unsafe-return': 'off',
+      'react-refresh/only-export-components': 'off',
     },
   },
   eslintConfigPrettier,
