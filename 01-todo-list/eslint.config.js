@@ -62,4 +62,13 @@ export default defineConfig([
       'no-debugger': 'error',
     },
   },
+  // For Tests
+  {
+    files: ['**/*.test.{ts,tsx}', '**/*.spec.{ts,tsx}', '**/__tests__/**'],
+    rules: {
+      '@typescript-eslint/no-explicit-any': 'off',
+      'no-console': 'off',
+      '@typescript-eslint/no-unused-vars': 'off',
+    },
+  },
 ]);
