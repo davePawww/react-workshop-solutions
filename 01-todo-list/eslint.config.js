@@ -6,11 +6,15 @@ import tseslint from 'typescript-eslint';
 import { defineConfig, globalIgnores } from 'eslint/config';
 import prettierConfig from 'eslint-config-prettier';
 import react from 'eslint-plugin-react';
+import importPlugin from 'eslint-plugin-import';
 
 export default defineConfig([
   globalIgnores(['dist']),
   {
     files: ['**/*.{ts,tsx}'],
+    plugins: {
+      import: importPlugin,
+    },
     extends: [
       js.configs.recommended,
       tseslint.configs.recommended,
@@ -25,9 +29,25 @@ export default defineConfig([
     },
     settings: {
       react: { version: 'detect' },
+      'import/resolver': { typescript: true },
     },
     rules: {
       'react/react-in-jsx-scope': 'off',
+      'import/no-duplicates': 'error',
+      'import/no-cycle': 'warn',
+      'import/order': [
+        'error',
+        {
+          groups: [
+            'builtin',
+            'external',
+            'internal',
+            ['parent', 'sibling', 'index'],
+          ],
+          'newlines-between': 'always',
+          alphabetize: { order: 'asc' },
+        },
+      ],
     },
   },
 ]);
