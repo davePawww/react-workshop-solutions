@@ -7,6 +7,7 @@ import { defineConfig, globalIgnores } from 'eslint/config';
 import prettierConfig from 'eslint-config-prettier';
 import react from 'eslint-plugin-react';
 import importPlugin from 'eslint-plugin-import';
+import jsxA11y from 'eslint-plugin-jsx-a11y';
 
 export default defineConfig([
   globalIgnores(['dist']),
@@ -21,6 +22,7 @@ export default defineConfig([
       reactHooks.configs.flat.recommended,
       reactRefresh.configs.vite,
       react.configs.flat.recommended,
+      jsxA11y.flatConfigs.recommended,
       prettierConfig,
     ],
     languageOptions: {
