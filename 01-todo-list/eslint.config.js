@@ -7,17 +7,17 @@ import { defineConfig, globalIgnores } from 'eslint/config'
 import eslintConfigPrettier from 'eslint-config-prettier'
 
 export default defineConfig([
-  globalIgnores(['dist']),
+  globalIgnores(['dist', 'node_modules', 'coverage']),
   {
     files: ['**/*.{ts,tsx}'],
     extends: [
       js.configs.recommended,
-      tseslint.configs.recommended,
+      tseslint.configs.recommendedTypeChecked,
       reactHooks.configs.flat.recommended,
       reactRefresh.configs.vite,
     ],
     languageOptions: {
-      ecmaVersion: 2020,
+      ecmaVersion: 2023,
       globals: globals.browser,
     },
   },
