@@ -1,10 +1,12 @@
+import TodoItem from '@/features/todo/TodoItem'
+
 import type { TodoListProps } from '@/features/todo/todo.types'
 
-export function TodoList({ todos }: TodoListProps) {
+export function TodoList({ todos, onToggle, onDelete }: TodoListProps) {
   return (
     <ul>
       {todos.map((todo) => (
-        <li key={todo.id}>{todo.text}</li>
+        <TodoItem key={todo.id} todo={todo} onToggle={onToggle} onDelete={onDelete} />
       ))}
     </ul>
   )

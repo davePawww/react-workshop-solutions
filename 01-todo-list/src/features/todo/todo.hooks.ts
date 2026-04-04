@@ -15,5 +15,24 @@ export function useTodoList() {
     setTodos((prev) => [newTodo, ...prev])
   }
 
-  return { todos, addTodo }
+  const toggleTodo = (id: number) => {
+    setTodos((prev) =>
+      prev.map((todo) => {
+        if (id === todo.id) {
+          return {
+            ...todo,
+            completed: !todo.completed,
+          }
+        }
+
+        return todo
+      }),
+    )
+  }
+
+  const deleteTodo = (id: number) => {
+    setTodos((prev) => prev.filter((todo) => todo.id !== id))
+  }
+
+  return { todos, addTodo, toggleTodo, deleteTodo }
 }
