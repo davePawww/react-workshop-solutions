@@ -3,30 +3,31 @@ import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 
-export function AddTodo() {
+import type { AddTodoProps } from '@/features/todo/todo.types'
+
+export function AddTodo({ onAdd }: AddTodoProps) {
   const [value, setValue] = useState('')
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.value.trim()) {
-      setValue(e.target.value)
-    }
-  }
+  const handleSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    const trimmed = value.trim()
+    if (!trimmed) return
 
-  const handleClick = () => {
-    console.log(value)
+    onAdd(trimmed)
+    setValue('')
   }
 
   return (
-    <div className="flex gap-2">
-      <Input type="text" value={value} onChange={handleChange} />
+    <form className="flex gap-2" onSubmit={handleSubmit}>
+      <Input type="text" value={value} onChange={(e) => setValue(e.target.value)} />
       <Button
+        type="submit"
         variant="default"
         size="icon"
         className="cursor-pointer transition-all hover:scale-105"
-        onClick={handleClick}
       >
         +
       </Button>
-    </div>
+    </form>
   )
 }
