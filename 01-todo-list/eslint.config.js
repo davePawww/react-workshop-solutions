@@ -80,6 +80,7 @@ export default defineConfig([
       },
     },
   },
+  // to ignore linting on shadCN components
   {
     files: ['src/components/ui/**/*.{ts,tsx}'],
     rules: {
