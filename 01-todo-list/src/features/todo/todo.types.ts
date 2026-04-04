@@ -7,3 +7,7 @@ export type Todo = {
 export type AddTodoProps = {
   onAdd: (text: string) => void
 }
+
+export type TodoListProps = {
+  todos: Todo[]
+}
