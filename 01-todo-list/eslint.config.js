@@ -89,6 +89,7 @@ export default defineConfig([
       '@typescript-eslint/no-unsafe-member-access': 'off',
       '@typescript-eslint/no-unsafe-return': 'off',
       'react-refresh/only-export-components': 'off',
+      'import/order': 'off',
     },
   },
   eslintConfigPrettier,
