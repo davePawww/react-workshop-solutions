@@ -1,4 +1,4 @@
-import { useCallback } from 'react'
+import { useCallback, useMemo } from 'react'
 
 import { useLocalStorage } from '@/hooks/useLocalStorage'
 
@@ -45,5 +45,9 @@ export function useTodoList() {
     [setTodos],
   )
 
-  return { todos, addTodo, toggleTodo, deleteTodo }
+  const activeTodosCount = useMemo(() => {
+    return todos.filter((t) => !t.completed).length
+  }, [todos])
+
+  return { todos, addTodo, toggleTodo, deleteTodo, activeTodosCount }
 }
