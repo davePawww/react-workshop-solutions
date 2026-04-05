@@ -49,5 +49,9 @@ export function useTodoList() {
     return todos.filter((t) => !t.completed).length
   }, [todos])
 
-  return { todos, addTodo, toggleTodo, deleteTodo, activeTodosCount }
+  const deleteAllCompleted = useCallback(() => {
+    setTodos((prev) => prev.filter((t) => !t.completed))
+  }, [setTodos])
+
+  return { todos, addTodo, toggleTodo, deleteTodo, activeTodosCount, deleteAllCompleted }
 }

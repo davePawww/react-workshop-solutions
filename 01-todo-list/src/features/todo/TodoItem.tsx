@@ -1,16 +1,6 @@
-import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
-import {
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from '@/components/ui/dialog'
 import { Label } from '@/components/ui/label'
+import { TodoDeleteDialog } from '@/features/todo/TodoDeleteDialog'
 
 import type { TodoItemProps } from '@/features/todo/todo.types'
 
@@ -28,31 +18,13 @@ export default function TodoItem({ todo, onToggle, onDelete }: TodoItemProps) {
       </Label>
 
       <div className="ml-auto cursor-pointer">
-        <Dialog>
-          <form>
-            <DialogTrigger asChild>
-              <Button type="button" variant="destructive" aria-label="Delete todo" size="icon-xs">
-                -
-              </Button>
-            </DialogTrigger>
-            <DialogContent className="sm:max-w-sm">
-              <DialogHeader>
-                <DialogTitle>You are about to delete a Todo Item</DialogTitle>
-                <DialogDescription>Are you sure you want to delete this item?</DialogDescription>
-              </DialogHeader>
-              <DialogFooter>
-                <DialogClose asChild>
-                  <Button type="button" variant="outline">
-                    Cancel
-                  </Button>
-                </DialogClose>
-                <Button type="button" onClick={() => onDelete(todo.id)} variant="destructive">
-                  Yes, Delete
-                </Button>
-              </DialogFooter>
-            </DialogContent>
-          </form>
-        </Dialog>
+        <TodoDeleteDialog
+          ariaLabel="Delete Todo"
+          buttonLabel="-"
+          dialogTitle="You are about to delete a todo item"
+          dialogDescription="Are you sure you want to delete this todo item?"
+          onConfirmDeletion={() => onDelete(todo.id)}
+        />
       </div>
     </li>
   )

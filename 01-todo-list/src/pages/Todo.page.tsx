@@ -1,13 +1,14 @@
 import { useState } from 'react'
 
-import { AddTodo, TodoFilter, TodoList } from '@/features/todo'
+import { AddTodo, TodoDeleteDialog, TodoFilter, TodoList } from '@/features/todo'
 import { FILTER } from '@/features/todo/todo.constants'
 import { useTodoList } from '@/features/todo/todo.hooks'
 
 import type { TFilter } from '@/features/todo/todo.types'
 
 export default function Todo() {
-  const { todos, addTodo, toggleTodo, deleteTodo, activeTodosCount } = useTodoList()
+  const { todos, addTodo, toggleTodo, deleteTodo, activeTodosCount, deleteAllCompleted } =
+    useTodoList()
   const [filter, setFilter] = useState<TFilter>(FILTER.ALL)
 
   const filteredTodos = todos.filter((todo) => {
@@ -26,6 +27,13 @@ export default function Todo() {
           filter={filter}
           onToggle={toggleTodo}
           onDelete={deleteTodo}
+        />
+        <TodoDeleteDialog
+          ariaLabel="Delete all completed"
+          buttonLabel="Clear Completed"
+          dialogTitle="You are about to delete all completed todos"
+          dialogDescription="Are you sure you want to delete all completed todos?"
+          onConfirmDeletion={() => deleteAllCompleted()}
         />
       </div>
     </main>

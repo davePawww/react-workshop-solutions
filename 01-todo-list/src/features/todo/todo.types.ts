@@ -30,3 +30,11 @@ export type TodoFilterProps = {
   onFilterChange: (filter: TFilter) => void
   remainingTodos: number
 }
+
+export type TodoDeleteDialogProps = {
+  ariaLabel: string
+  buttonLabel: string
+  dialogTitle: string
+  dialogDescription: string
+  onConfirmDeletion: () => void
+}
