@@ -19,7 +19,7 @@ export default function Todo() {
 
   return (
     <main className="flex min-h-screen items-center justify-center">
-      <div className="flex min-h-96 min-w-96 flex-col gap-4 rounded-xl border-2 p-4 shadow-2xl">
+      <div className="m-4 flex min-h-96 w-full max-w-md flex-col gap-4 rounded-xl border-2 p-4 shadow-2xl">
         <AddTodo onAdd={addTodo} />
         <TodoFilter filter={filter} onFilterChange={setFilter} remainingTodos={activeTodosCount} />
         <TodoList
