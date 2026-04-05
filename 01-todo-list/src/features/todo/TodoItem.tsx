@@ -10,20 +10,28 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog'
+import { Label } from '@/components/ui/label'
 
 import type { TodoItemProps } from '@/features/todo/todo.types'
 
 export default function TodoItem({ todo, onToggle, onDelete }: TodoItemProps) {
   return (
     <li className="flex items-center gap-2">
-      <Checkbox checked={todo.completed} onCheckedChange={() => onToggle(todo.id)} />
-      <p className={todo.completed ? 'line-through opacity-30' : ''}>{todo.text}</p>
+      <Checkbox
+        id={todo.id}
+        checked={todo.completed}
+        onCheckedChange={() => onToggle(todo.id)}
+        aria-label={todo.text}
+      />
+      <Label htmlFor={todo.id} className={todo.completed ? 'line-through opacity-30' : ''}>
+        {todo.text}
+      </Label>
 
       <div className="ml-auto cursor-pointer">
         <Dialog>
           <form>
             <DialogTrigger asChild>
-              <Button variant="destructive" size="icon-xs">
+              <Button type="button" variant="destructive" aria-label="Delete todo" size="icon-xs">
                 -
               </Button>
             </DialogTrigger>
@@ -34,9 +42,11 @@ export default function TodoItem({ todo, onToggle, onDelete }: TodoItemProps) {
               </DialogHeader>
               <DialogFooter>
                 <DialogClose asChild>
-                  <Button variant="outline">Cancel</Button>
+                  <Button type="button" variant="outline">
+                    Cancel
+                  </Button>
                 </DialogClose>
-                <Button onClick={() => onDelete(todo.id)} variant="destructive">
+                <Button type="button" onClick={() => onDelete(todo.id)} variant="destructive">
                   Yes, Delete
                 </Button>
               </DialogFooter>

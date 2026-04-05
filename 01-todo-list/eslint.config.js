@@ -65,6 +65,9 @@ export default defineConfig([
       'jsx-a11y/aria-role': 'error',
       'jsx-a11y/label-has-associated-control': 'error',
       'jsx-a11y/click-events-have-key-events': 'warn',
+      'jsx-a11y/control-has-associated-label': 'error',
+      'jsx-a11y/no-static-element-interactions': 'warn',
+      'jsx-a11y/interactive-supports-focus': 'warn',
     },
     settings: {
       // eslint plugin react
@@ -78,6 +81,14 @@ export default defineConfig([
         },
         node: true,
       },
+      'jsx-a11y': {
+        components: {
+          Button: 'button',
+          Input: 'input',
+          Label: 'label',
+          Checkbox: 'input',
+        },
+      },
     },
   },
   // to ignore linting on shadCN components
@@ -90,6 +101,14 @@ export default defineConfig([
       '@typescript-eslint/no-unsafe-return': 'off',
       'react-refresh/only-export-components': 'off',
       'import/order': 'off',
+      'jsx-a11y/alt-text': 'off',
+      'jsx-a11y/anchor-is-valid': 'off',
+      'jsx-a11y/aria-role': 'off',
+      'jsx-a11y/label-has-associated-control': 'off',
+      'jsx-a11y/click-events-have-key-events': 'off',
+      'jsx-a11y/control-has-associated-label': 'off',
+      'jsx-a11y/no-static-element-interactions': 'off',
+      'jsx-a11y/interactive-supports-focus': 'off',
     },
   },
   eslintConfigPrettier,

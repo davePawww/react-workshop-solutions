@@ -1,5 +1,7 @@
+import type { FILTER } from '@/features/todo/todo.constants'
+
 export type Todo = {
-  id: number
+  id: string
   text: string
   completed: boolean
 }
@@ -10,20 +12,21 @@ export type AddTodoProps = {
 
 export type TodoListProps = {
   todos: Todo[]
-  onToggle: (id: number) => void
-  onDelete: (id: number) => void
+  filter: TFilter
+  onToggle: (id: string) => void
+  onDelete: (id: string) => void
 }
 
 export type TodoItemProps = {
   todo: Todo
-  onToggle: (id: number) => void
-  onDelete: (id: number) => void
+  onToggle: (id: string) => void
+  onDelete: (id: string) => void
 }
 
-export type TFilter = 'all' | 'active' | 'completed'
+export type TFilter = (typeof FILTER)[keyof typeof FILTER]
 
 export type TodoFilterProps = {
   filter: TFilter
-  onFilterChange: React.Dispatch<React.SetStateAction<TFilter>>
+  onFilterChange: (filter: TFilter) => void
   remainingTodos: number
 }

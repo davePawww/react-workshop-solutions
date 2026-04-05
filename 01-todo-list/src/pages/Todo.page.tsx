@@ -21,7 +21,12 @@ export default function Todo() {
       <div className="flex min-h-96 min-w-96 flex-col gap-4 rounded-xl border-2 p-4 shadow-2xl">
         <AddTodo onAdd={addTodo} />
         <TodoFilter filter={filter} onFilterChange={setFilter} remainingTodos={activeTodosCount} />
-        <TodoList todos={filteredTodos} onToggle={toggleTodo} onDelete={deleteTodo} />
+        <TodoList
+          todos={filteredTodos}
+          filter={filter}
+          onToggle={toggleTodo}
+          onDelete={deleteTodo}
+        />
       </div>
     </main>
   )

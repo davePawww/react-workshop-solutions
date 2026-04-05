@@ -1,7 +1,5 @@
-import type { TFilter } from '@/features/todo/todo.types'
-
-export const FILTER: { ALL: TFilter; ACTIVE: TFilter; COMPLETED: TFilter } = {
+export const FILTER = {
   ALL: 'all',
   ACTIVE: 'active',
   COMPLETED: 'completed',
-}
+} as const

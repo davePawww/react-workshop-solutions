@@ -10,7 +10,7 @@ export function useTodoList() {
   const addTodo = useCallback(
     (text: string) => {
       const newTodo = {
-        id: Date.now(),
+        id: crypto.randomUUID(),
         text,
         completed: false,
       }
@@ -21,7 +21,7 @@ export function useTodoList() {
   )
 
   const toggleTodo = useCallback(
-    (id: number) => {
+    (id: string) => {
       setTodos((prev) =>
         prev.map((todo) => {
           if (id === todo.id) {
@@ -39,7 +39,7 @@ export function useTodoList() {
   )
 
   const deleteTodo = useCallback(
-    (id: number) => {
+    (id: string) => {
       setTodos((prev) => prev.filter((todo) => todo.id !== id))
     },
     [setTodos],
