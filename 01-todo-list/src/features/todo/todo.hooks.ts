@@ -2,16 +2,18 @@ import { useCallback, useMemo } from 'react'
 
 import { useLocalStorage } from '@/hooks/useLocalStorage'
 
-import type { Todo } from '@/features/todo/todo.types'
+import type { Todo, TPriority } from '@/features/todo/todo.types'
 
 export function useTodoList() {
   const [todos, setTodos] = useLocalStorage<Todo[]>('todos', [])
 
   const addTodo = useCallback(
-    (text: string) => {
+    (text: string, dueDate: Date, priority: TPriority) => {
       const newTodo = {
         id: crypto.randomUUID(),
         text,
+        dueDate,
+        priority,
         completed: false,
       }
 

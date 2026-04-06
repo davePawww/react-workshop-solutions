@@ -1,13 +1,17 @@
-import type { FILTER } from '@/features/todo/todo.constants'
+import { PRIORITY, FILTER } from '@/features/todo/todo.constants'
+
+export type TPriority = (typeof PRIORITY)[keyof typeof PRIORITY]
 
 export type Todo = {
   id: string
   text: string
   completed: boolean
+  dueDate: Date
+  priority: TPriority
 }
 
 export type AddTodoProps = {
-  onAdd: (text: string) => void
+  onAdd: (text: string, dueDate: Date, priority: TPriority) => void
 }
 
 export type TodoListProps = {

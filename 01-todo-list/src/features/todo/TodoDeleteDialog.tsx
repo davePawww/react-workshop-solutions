@@ -29,6 +29,7 @@ export function TodoDeleteDialog({
               variant="destructive"
               aria-label={ariaLabel}
               size={buttonLabel.length === 1 ? 'icon-xs' : 'sm'}
+              className="cursor-pointer"
             >
               {buttonLabel}
             </Button>

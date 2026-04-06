@@ -1,6 +1,8 @@
+import { Badge } from '@/components/ui/badge'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Label } from '@/components/ui/label'
 import { TodoDeleteDialog } from '@/features/todo/TodoDeleteDialog'
+import { capitalizeFirstLetter, formatTodoItemDate } from '@/utils'
 
 import type { TodoItemProps } from '@/features/todo/todo.types'
 
@@ -17,7 +19,13 @@ export default function TodoItem({ todo, onToggle, onDelete }: TodoItemProps) {
         {todo.text}
       </Label>
 
-      <div className="ml-auto cursor-pointer">
+      <div className="ml-auto flex items-center gap-1">
+        <Badge className="rounded" variant="secondary">
+          {capitalizeFirstLetter(todo.priority)}
+        </Badge>
+        <Badge className="rounded" variant="outline">
+          {formatTodoItemDate(todo.dueDate)}
+        </Badge>
         <TodoDeleteDialog
           ariaLabel="Delete Todo"
           buttonLabel="-"
