@@ -1,73 +1,71 @@
-# React + TypeScript + Vite
+# Todo List Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A React-based Todo List application built with TypeScript and Vite, featuring a modern component architecture using shadcn/ui components.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- Add, edit, and delete todo items
+- Filter todos by status (all, active, completed)
+- Due date tracking with calendar picker
+- Local storage persistence
+- Responsive design
+- Category/tag badges
 
-## React Compiler
+## Project Structure
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```
+src/
+├── components/ui/       # shadcn/ui components (button, dialog, input, etc.)
+├── features/todo/       # Todo feature module
+│   ├── TodoItem.tsx     # Individual todo item
+│   ├── TodoList.tsx     # List of todos
+│   ├── TodoForm.tsx    # Form for adding/editing todos
+│   ├── TodoFilter.tsx  # Filter controls
+│   └── todo.hooks.ts   # Custom hooks for todo logic
+├── hooks/              # Shared hooks (useLocalStorage)
+├── pages/              # Page components
+└── utils/              # Utility functions
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Tech Stack
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- React 19
+- TypeScript
+- Vite
+- shadcn/ui
+- Tailwind CSS (implied by shadcn/ui)
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Getting Started
+
+```bash
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
+
+# Build for production
+npm run build
 ```
+
+## What's next
+
+1. **State Management**: Consider migrating from localStorage + useState to a proper state management solution like Zustand or React Query for better scalability
+2. **Testing**: Add unit tests with Vitest and component tests with React Testing Library
+3. **Accessibility**: Add ARIA labels and keyboard navigation support for better accessibility
+4. **i18n**: Add internationalization for multi-language support
+5. **Drag & Drop**: Implement drag-and-drop reordering for todo items (could use @dnd-kit)
+6. **Undo/Redo**: Add undo functionality for deleted todos
+7. **Categories**: Add color-coded categories or projects for organizing todos
+8. **Subtasks**: Allow creating subtasks under each todo
+9. **Priority Levels**: Add priority levels (high, medium, low) to todos
+10. **Reminders**: Add notification/reminder system for due dates
+
+## TODO
+
+- [ ] Implement proper error boundaries
+- [ ] Add loading states and skeleton UI
+- [ ] Set up CI/CD pipeline
+- [ ] Add E2E tests with Playwright
+- [ ] Implement dark mode toggle
+- [ ] Instead of double-click to update a todo item, just add an edit button instead
