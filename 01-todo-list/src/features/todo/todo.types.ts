@@ -19,12 +19,14 @@ export type TodoListProps = {
   filter: TFilter
   onToggle: (id: string) => void
   onDelete: (id: string) => void
+  onEdit: (todo: Todo) => void
 }
 
 export type TodoItemProps = {
   todo: Todo
   onToggle: (id: string) => void
   onDelete: (id: string) => void
+  onEdit: (todo: Todo) => void
 }
 
 export type TFilter = (typeof FILTER)[keyof typeof FILTER]
@@ -41,4 +43,12 @@ export type TodoDeleteDialogProps = {
   dialogTitle: string
   dialogDescription: string
   onConfirmDeletion: () => void
+}
+
+export type TodoFormProps = {
+  mode: 'create' | 'update'
+  initialValues?: Partial<Todo>
+  onSubmit: (description: string, date: Date, priority: TPriority, id?: string) => void
+  open?: boolean
+  onOpenChange?: (open: boolean) => void
 }

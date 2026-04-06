@@ -55,5 +55,33 @@ export function useTodoList() {
     setTodos((prev) => prev.filter((t) => !t.completed))
   }, [setTodos])
 
-  return { todos, addTodo, toggleTodo, deleteTodo, activeTodosCount, deleteAllCompleted }
+  const updateTodo = useCallback(
+    (id: string, text: string, dueDate: Date, priority: TPriority) => {
+      setTodos((prev) =>
+        prev.map((t) => {
+          if (t.id === id) {
+            return {
+              ...t,
+              text,
+              dueDate,
+              priority,
+            }
+          }
+
+          return t
+        }),
+      )
+    },
+    [setTodos],
+  )
+
+  return {
+    todos,
+    addTodo,
+    toggleTodo,
+    deleteTodo,
+    activeTodosCount,
+    deleteAllCompleted,
+    updateTodo,
+  }
 }

@@ -19,45 +19,45 @@ import { Input } from '@/components/ui/input'
 import { NativeSelect, NativeSelectOption } from '@/components/ui/native-select'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import { PRIORITY } from '@/features/todo/todo.constants'
-import { type TPriority, type AddTodoProps } from '@/features/todo/todo.types'
 
-export function AddTodo({ onAdd }: AddTodoProps) {
-  const [value, setValue] = useState('')
-  const [date, setDate] = useState<Date>(new Date())
-  const [priority, setPriority] = useState<TPriority>(PRIORITY.LOW)
-  const [open, setOpen] = useState(false)
+import type { TodoFormProps, TPriority } from '@/features/todo/todo.types'
 
-  const handleClick = () => {
-    const trimmed = value.trim()
-    if (!trimmed) return
-
-    onAdd(trimmed, date, priority)
-    setValue('')
-  }
+export default function TodoForm({
+  mode,
+  initialValues,
+  onSubmit,
+  open,
+  onOpenChange,
+}: TodoFormProps) {
+  const [description, setDescription] = useState(initialValues?.text ?? '')
+  const [date, setDate] = useState(initialValues?.dueDate ?? new Date())
+  const [priority, setPriority] = useState<TPriority>(initialValues?.priority ?? PRIORITY.LOW)
+  const [openCalendar, setOpenCalendar] = useState(false)
 
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={onOpenChange}>
       <form>
-        <DialogTrigger asChild>
-          {/* conditional render 
-              button if mode = create
-              li's if mode = edit
-          */}
-          <Button
-            className="w-full cursor-pointer transition-all hover:scale-105"
-            type="button"
-            variant="default"
-          >
-            Create a new Todo
-          </Button>
-        </DialogTrigger>
+        {mode === 'create' && (
+          <DialogTrigger asChild>
+            <Button
+              className="w-full cursor-pointer transition-all hover:scale-105"
+              type="button"
+              variant="default"
+            >
+              Create a new Todo
+            </Button>
+          </DialogTrigger>
+        )}
         <DialogContent className="sm:max-w-sm">
           <DialogHeader>
-            {/* dialogTitle will come from props */}
-            <DialogTitle>Create a new Todo item</DialogTitle>
-            {/* dialogDescription will come from props */}
-            <DialogDescription>Fill out below to create a new item</DialogDescription>
+            <DialogTitle>
+              {mode === 'create' ? 'Create a new Todo Item' : 'Update Todo Item'}
+            </DialogTitle>
+            <DialogDescription>
+              {mode === 'create' ? 'Fill out the form below' : 'Update the form below'}
+            </DialogDescription>
           </DialogHeader>
+
           <FieldGroup>
             <Field>
               <FieldLabel htmlFor="text">Description</FieldLabel>
@@ -65,13 +65,14 @@ export function AddTodo({ onAdd }: AddTodoProps) {
                 id="text"
                 name="text"
                 aria-labelledby="text"
-                value={value}
-                onChange={(e) => setValue(e.target.value)}
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
               />
             </Field>
+
             <Field>
               <FieldLabel htmlFor="due-date">Due Date</FieldLabel>
-              <Popover open={open} onOpenChange={setOpen}>
+              <Popover open={openCalendar} onOpenChange={setOpenCalendar}>
                 <PopoverTrigger asChild>
                   <Button
                     variant="outline"
@@ -88,13 +89,14 @@ export function AddTodo({ onAdd }: AddTodoProps) {
                     selected={date}
                     onSelect={(date) => {
                       setDate(date ? date : new Date())
-                      setOpen(false)
+                      setOpenCalendar(false)
                     }}
                     defaultMonth={date}
                   />
                 </PopoverContent>
               </Popover>
             </Field>
+
             <Field>
               <FieldLabel htmlFor="priority">Priority</FieldLabel>
               <NativeSelect
@@ -109,6 +111,7 @@ export function AddTodo({ onAdd }: AddTodoProps) {
               </NativeSelect>
             </Field>
           </FieldGroup>
+
           <DialogFooter>
             <DialogClose asChild>
               <Button type="button" variant="outline">
@@ -116,9 +119,18 @@ export function AddTodo({ onAdd }: AddTodoProps) {
               </Button>
             </DialogClose>
             <DialogClose asChild>
-              <Button type="button" onClick={handleClick}>
-                Create new
-              </Button>
+              {mode === 'create' ? (
+                <Button type="button" onClick={() => onSubmit(description, date, priority)}>
+                  Create New
+                </Button>
+              ) : (
+                <Button
+                  type="button"
+                  onClick={() => onSubmit(description, date, priority, initialValues?.id)}
+                >
+                  Update Todo
+                </Button>
+              )}
             </DialogClose>
           </DialogFooter>
         </DialogContent>

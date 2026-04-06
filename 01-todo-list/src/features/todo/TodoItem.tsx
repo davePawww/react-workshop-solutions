@@ -6,9 +6,9 @@ import { capitalizeFirstLetter, formatTodoItemDate } from '@/utils'
 
 import type { TodoItemProps } from '@/features/todo/todo.types'
 
-export default function TodoItem({ todo, onToggle, onDelete }: TodoItemProps) {
+export default function TodoItem({ todo, onToggle, onDelete, onEdit }: TodoItemProps) {
   return (
-    <li className="flex items-center gap-2">
+    <li className="flex items-center gap-2" onDoubleClick={() => onEdit(todo)}>
       <Checkbox
         id={todo.id}
         checked={todo.completed}
