@@ -12,7 +12,7 @@ export default defineConfig([
   globalIgnores(['dist', 'node_modules', 'coverage']),
   {
     files: ['**/*.{ts,tsx}'],
-    plugins: { import: importPlugin },
+    plugins: { import: importPlugin, 'unused-imports': unusedImports },
     extends: [
       js.configs.recommended,
       tseslint.configs.recommendedTypeChecked,
@@ -51,6 +51,19 @@ export default defineConfig([
           ],
           'newlines-between': 'always',
           alphabetize: { order: 'asc', caseInsensitive: true },
+        },
+      ],
+      // eslint plugin unused imports
+      'no-unused-vars': 'off',
+      '@typescript-eslint/no-unused-vars': 'off',
+      'unused-imports/no-unused-imports': 'error',
+      'unused-imports/no-unused-vars': [
+        'warn',
+        {
+          vars: 'all',
+          varsIgnorePattern: '^_',
+          args: 'after-used',
+          argsIgnorePattern: '^_',
         },
       ],
     },
