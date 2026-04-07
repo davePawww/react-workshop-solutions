@@ -7,12 +7,17 @@ import { defineConfig, globalIgnores } from 'eslint/config';
 import eslintConfigPrettier from 'eslint-config-prettier';
 import react from 'eslint-plugin-react';
 import importPlugin from 'eslint-plugin-import';
+import jsxA11y from 'eslint-plugin-jsx-a11y';
 
 export default defineConfig([
   globalIgnores(['dist', 'node_modules', 'coverage']),
   {
     files: ['**/*.{ts,tsx}'],
-    plugins: { import: importPlugin, 'unused-imports': unusedImports },
+    plugins: {
+      import: importPlugin,
+      'unused-imports': unusedImports,
+      'jsx-a11y': jsxA11y,
+    },
     extends: [
       js.configs.recommended,
       tseslint.configs.recommendedTypeChecked,
@@ -66,6 +71,15 @@ export default defineConfig([
           argsIgnorePattern: '^_',
         },
       ],
+      // eslint plugin jsx a11y
+      'jsx-a11y/alt-text': 'error',
+      'jsx-a11y/anchor-is-valid': 'error',
+      'jsx-a11y/aria-role': 'error',
+      'jsx-a11y/label-has-associated-control': 'error',
+      'jsx-a11y/click-events-have-key-events': 'warn',
+      'jsx-a11y/control-has-associated-label': 'error',
+      'jsx-a11y/no-static-element-interactions': 'warn',
+      'jsx-a11y/interactive-supports-focus': 'warn',
     },
     settings: {
       // eslint plugin react
@@ -78,6 +92,15 @@ export default defineConfig([
           project: './tsconfig.json',
         },
         node: true,
+      },
+      // jsx a11y
+      'jsx-a11y': {
+        components: {
+          Button: 'button',
+          Input: 'input',
+          Label: 'label',
+          Checkbox: 'input',
+        },
       },
     },
   },
