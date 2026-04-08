@@ -15,9 +15,7 @@ export default defineConfig([
   {
     files: ['**/*.{ts,tsx}'],
     plugins: {
-      import: importPlugin,
       'unused-imports': unusedImports,
-      'jsx-a11y': jsxA11y,
     },
     extends: [
       js.configs.recommended,
@@ -26,23 +24,35 @@ export default defineConfig([
       reactRefresh.configs.vite,
       react.configs.flat.recommended,
       react.configs.flat['jsx-runtime'],
+      importPlugin.flatConfigs.recommended,
+      jsxA11y.flatConfigs.recommended,
     ],
     languageOptions: {
-      ecmaVersion: 2023,
-      globals: globals.browser,
+      globals: {
+        ...globals.browser,
+        ...globals.es2020,
+      },
       parserOptions: {
+        ecmaVersion: 'latest',
+        sourceType: 'module',
+        ecmaFeatures: { jsx: true },
         projectService: true,
         tsconfigRootDir: import.meta.dirname,
       },
     },
     rules: {
-      // eslint plugin react
+      // React Overrides
       'react/jsx-no-useless-fragment': 'error',
       'react/self-closing-comp': 'error',
       'react/prop-types': 'off',
-      // eslint plugin import
-      'import/no-unresolved': 'error',
-      'import/no-duplicates': 'error',
+      'react-refresh/only-export-components': [
+        'warn',
+        {
+          allowConstantExport: true, // Allow exporting constants alongside components
+        },
+      ],
+
+      // Import Rules
       'import/order': [
         'error',
         {
@@ -51,9 +61,13 @@ export default defineConfig([
           alphabetize: { order: 'asc', caseInsensitive: true },
         },
       ],
-      // eslint plugin unused imports
+
+      // TypeScript
+      '@typescript-eslint/no-explicit-any': 'error',
+      '@typescript-eslint/no-unused-vars': 'off', // Turn off because we are using unused imports plugin
+
+      // Unused Imports
       'no-unused-vars': 'off',
-      '@typescript-eslint/no-unused-vars': 'off',
       'unused-imports/no-unused-imports': 'error',
       'unused-imports/no-unused-vars': [
         'warn',
@@ -64,15 +78,9 @@ export default defineConfig([
           argsIgnorePattern: '^_',
         },
       ],
-      // eslint plugin jsx a11y
-      'jsx-a11y/alt-text': 'error',
-      'jsx-a11y/anchor-is-valid': 'error',
-      'jsx-a11y/aria-role': 'error',
-      'jsx-a11y/label-has-associated-control': 'error',
+
+      // Optional a11y tweak (others come from preset)
       'jsx-a11y/click-events-have-key-events': 'warn',
-      'jsx-a11y/control-has-associated-label': 'error',
-      'jsx-a11y/no-static-element-interactions': 'warn',
-      'jsx-a11y/interactive-supports-focus': 'warn',
     },
     settings: {
       // eslint plugin react
@@ -85,15 +93,6 @@ export default defineConfig([
           project: './tsconfig.json',
         },
         node: true,
-      },
-      // jsx a11y
-      'jsx-a11y': {
-        components: {
-          Button: 'button',
-          Input: 'input',
-          Label: 'label',
-          Checkbox: 'input',
-        },
       },
     },
   },
