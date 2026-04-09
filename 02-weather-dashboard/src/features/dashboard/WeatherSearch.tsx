@@ -23,6 +23,7 @@ export function WeatherSearch() {
     enabled: debouncedValue.length > 0,
   });
 
+  const showResults = !!cityName && (isFetching || !!error || (data?.results?.length ?? 0) >= 0);
   // data.latitude, data.longitude
   // to be passed in
   // https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&daily=temperature_2m_max,temperature_2m_min,weather_code&hourly=temperature_2m,relative_humidity_2m,wind_speed_10m,weather_code&timezone=Asia%2FSingapore&temperature_unit=fahrenheit
@@ -31,35 +32,41 @@ export function WeatherSearch() {
   // latitude, longitude, timezone, temparature unit
 
   return (
-    <Command
-      className="mx-auto h-auto w-3/4 rounded-lg border shadow-[0_0_30px_rgba(59,130,246,0.35)] ring-1 ring-blue-300/30"
-      shouldFilter={false}
-    >
-      <CommandInput
-        value={searchString}
-        onValueChange={setSearchString}
-        placeholder="Type a name of a city to search..."
-      />
-      <CommandList className="mt-1">
-        {!!cityName && !isFetching && data?.results?.length === 0 && (
-          <CommandEmpty>No results found.</CommandEmpty>
-        )}
-        {isFetching && (
-          <CommandItem>
-            <Spinner />
-          </CommandItem>
-        )}
-        {error && !isFetching && <CommandItem>There was a problem loading the data..</CommandItem>}
-
-        {data &&
-          !isFetching &&
-          data.results?.map((c) => (
-            <CommandItem key={c.id} className="mb-1">
-              {c.name} - {c.country} - {c.admin1} - {c.admin2}
-              {c.admin3 ? ` - ${c.admin3}` : ''}
+    <div className="relative z-50">
+      {showResults && <div className="fixed inset-0 z-40 bg-black/20 backdrop-blur-sm" />}
+      <Command
+        className="relative z-50 mx-auto h-auto w-3/4 overflow-visible rounded-lg border pb-2 shadow-[0_0_10px_rgba(59,130,246,0.35)] ring-1 ring-blue-300/30"
+        shouldFilter={false}
+      >
+        <CommandInput
+          value={searchString}
+          onValueChange={setSearchString}
+          placeholder="Type a name of a city to search..."
+        />
+        <CommandList className="bg-popover absolute top-full right-0 left-0 z-50 rounded-lg shadow-lg">
+          {!!cityName && !isFetching && data?.results?.length === 0 && (
+            <CommandEmpty>No results found.</CommandEmpty>
+          )}
+          {isFetching && (
+            <CommandItem className="flex items-center justify-center gap-2">
+              <Spinner />
+              <p>Finding Cities..</p>
             </CommandItem>
-          ))}
-      </CommandList>
-    </Command>
+          )}
+          {error && !isFetching && (
+            <CommandItem>There was a problem loading the data..</CommandItem>
+          )}
+
+          {data &&
+            !isFetching &&
+            data.results?.map((c) => (
+              <CommandItem key={c.id} className="mb-1 rounded-none border-b border-b-slate-700/15">
+                {c.name} - {c.country} - {c.admin1} - {c.admin2}
+                {c.admin3 ? ` - ${c.admin3}` : ''}
+              </CommandItem>
+            ))}
+        </CommandList>
+      </Command>
+    </div>
   );
 }
