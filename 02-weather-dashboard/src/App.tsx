@@ -1,10 +1,13 @@
-import { Button } from '@/components/ui/button';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+
+import { Dashboard } from '@/features/dashboard';
+
+const queryClient = new QueryClient();
 
 export default function App() {
   return (
-    <>
-      <h1 className="text-3xl font-bold text-red-500 underline">Hello world!</h1>
-      <Button>Test</Button>
-    </>
+    <QueryClientProvider client={queryClient}>
+      <Dashboard />
+    </QueryClientProvider>
   );
 }

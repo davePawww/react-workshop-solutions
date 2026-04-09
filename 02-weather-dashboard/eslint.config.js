@@ -9,6 +9,7 @@ import react from 'eslint-plugin-react';
 import importPlugin from 'eslint-plugin-import';
 import unusedImports from 'eslint-plugin-unused-imports';
 import jsxA11y from 'eslint-plugin-jsx-a11y';
+import pluginQuery from '@tanstack/eslint-plugin-query';
 
 export default defineConfig([
   globalIgnores(['dist', 'node_modules', 'coverage']),
@@ -26,6 +27,7 @@ export default defineConfig([
       react.configs.flat['jsx-runtime'],
       importPlugin.flatConfigs.recommended,
       jsxA11y.flatConfigs.recommended,
+      pluginQuery.configs['flat/recommended'],
     ],
     languageOptions: {
       globals: {
