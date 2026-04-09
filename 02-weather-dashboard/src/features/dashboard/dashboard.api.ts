@@ -1,8 +1,4 @@
-import type { GeoLocation } from '@/features/dashboard/dashboard.types';
-
-type GeoCodingResponse = {
-  results?: GeoLocation[];
-};
+import type { GeoCodingResponse } from '@/features/dashboard/dashboard.types';
 
 const getCities = async (name: string): Promise<GeoCodingResponse> => {
   const response = await fetch(

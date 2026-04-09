@@ -31,7 +31,10 @@ export function WeatherSearch() {
   // latitude, longitude, timezone, temparature unit
 
   return (
-    <Command className="max-w-sm rounded-lg border" shouldFilter={false}>
+    <Command
+      className="mx-auto h-auto w-3/4 rounded-lg border shadow-[0_0_30px_rgba(59,130,246,0.35)] ring-1 ring-blue-300/30"
+      shouldFilter={false}
+    >
       <CommandInput
         value={searchString}
         onValueChange={setSearchString}
