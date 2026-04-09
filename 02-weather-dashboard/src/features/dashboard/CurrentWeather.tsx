@@ -5,7 +5,7 @@ import StatsCard from '@/features/dashboard/StatsCard';
 export function CurrentWeather() {
   return (
     <>
-      <h1 className="mt-8 font-medium">Current Weather</h1>
+      <h1 className="mt-8 text-lg font-medium tracking-wider">Current Weather</h1>
       <div className="grid grid-cols-3 gap-5">
         <StatsCard
           icon={<Building size={20} />}
