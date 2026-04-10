@@ -2,10 +2,10 @@ import { Thermometer, Building, CloudRain, Droplets, Wind } from 'lucide-react';
 
 import StatsCard from '@/features/dashboard/StatsCard';
 
-export function CurrentWeather() {
+export default function CurrentWeather() {
   return (
-    <>
-      <h1 className="mt-8 text-lg font-medium tracking-wider">Current Weather</h1>
+    <div>
+      <h1 className="mb-1.5 text-lg font-medium tracking-wider">Current Weather</h1>
       <div className="grid grid-cols-3 gap-5">
         <StatsCard
           icon={<Building size={20} />}
@@ -17,6 +17,6 @@ export function CurrentWeather() {
         <StatsCard icon={<Droplets size={20} />} title={'Humidity'} content={33} />
         <StatsCard icon={<Wind size={20} />} title={'Wind'} content={28.2} />
       </div>
-    </>
+    </div>
   );
 }

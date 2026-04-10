@@ -12,7 +12,7 @@ import { Spinner } from '@/components/ui/spinner';
 import { getCities } from '@/features/dashboard/dashboard.api';
 import { useDebounce } from '@/hooks';
 
-export function WeatherSearch() {
+export default function WeatherSearch() {
   const [searchString, setSearchString] = useState('');
   const cityName = searchString.trim();
   const debouncedValue = useDebounce(cityName, 500);
@@ -61,7 +61,8 @@ export function WeatherSearch() {
             !isFetching &&
             data.results?.map((c) => (
               <CommandItem key={c.id} className="mb-1 rounded-none border-b border-b-slate-700/15">
-                {c.name} - {c.country} - {c.admin1} - {c.admin2}
+                {c.name} - {c.country} - {c.admin1}
+                {c.admin2 ? ` - ${c.admin2}` : ''}
                 {c.admin3 ? ` - ${c.admin3}` : ''}
               </CommandItem>
             ))}
