@@ -12,7 +12,9 @@ import { Spinner } from '@/components/ui/spinner';
 import { getCities } from '@/features/dashboard/dashboard.api';
 import { useDebounce } from '@/hooks';
 
-export default function WeatherSearch() {
+import type { Coordinates, WeatherSearchProps } from '@/features/dashboard/dashboard.types';
+
+export default function WeatherSearch({ onSelectCoordinates, onSelectCity }: WeatherSearchProps) {
   const [searchString, setSearchString] = useState('');
   const cityName = searchString.trim();
   const debouncedValue = useDebounce(cityName, 500);
@@ -24,12 +26,14 @@ export default function WeatherSearch() {
   });
 
   const showResults = !!cityName && (isFetching || !!error || (data?.results?.length ?? 0) >= 0);
-  // data.latitude, data.longitude
-  // to be passed in
-  // https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&daily=temperature_2m_max,temperature_2m_min,weather_code&hourly=temperature_2m,relative_humidity_2m,wind_speed_10m,weather_code&timezone=Asia%2FSingapore&temperature_unit=fahrenheit
 
-  // Things we need passed
-  // latitude, longitude, timezone, temparature unit
+  const handleSelect = (coordinates: Coordinates, selectedCityName: string) => {
+    if (!isFetching) {
+      onSelectCoordinates(coordinates);
+      onSelectCity(selectedCityName);
+      setSearchString('');
+    }
+  };
 
   return (
     <div className="relative z-50">
@@ -60,7 +64,16 @@ export default function WeatherSearch() {
           {data &&
             !isFetching &&
             data.results?.map((c) => (
-              <CommandItem key={c.id} className="mb-1 rounded-none border-b border-b-slate-700/15">
+              <CommandItem
+                key={c.id}
+                className="mb-1 rounded-none border-b border-b-slate-700/15"
+                onSelect={() =>
+                  handleSelect(
+                    { latitude: c.latitude, longitude: c.longitude },
+                    c.name + ' - ' + c.country,
+                  )
+                }
+              >
                 {c.name} - {c.country} - {c.admin1}
                 {c.admin2 ? ` - ${c.admin2}` : ''}
                 {c.admin3 ? ` - ${c.admin3}` : ''}
