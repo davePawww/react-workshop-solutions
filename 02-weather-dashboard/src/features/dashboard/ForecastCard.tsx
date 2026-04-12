@@ -12,11 +12,11 @@ export default function ForecastCard({
   weatherCondition,
 }: ForecastCardProps) {
   return (
-    <Card className="shadow-[0_0_10px_rgba(59,130,246,0.35)] ring-1 ring-blue-300/30">
+    <Card className="hover:shadow-[0_0_4px_rgba(59,130,246,0.35)] hover:shadow-teal-500">
       <CardContent className="grid grid-cols-[repeat(auto-fit,minmax(220px,1fr))]">
         <div className="text-center">
-          <h1 className="text-lg font-semibold">{getDayOfTheWeek(date)}</h1>
-          <p className="text-white/50">{date}</p>
+          <h1 className="font-semibol text-lg">{getDayOfTheWeek(date)}</h1>
+          <p className="text-teal-500/80">{date}</p>
         </div>
         <div className="flex items-center gap-2">
           <LucideThermometerSun />

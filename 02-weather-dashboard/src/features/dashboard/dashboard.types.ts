@@ -1,4 +1,8 @@
-import type { Dispatch, JSX, SetStateAction } from 'react';
+import type { Dispatch, JSX, ReactNode, SetStateAction } from 'react';
+
+export type LayoutProps = {
+  children: ReactNode;
+};
 
 export type GeoLocation = {
   id: number;

@@ -20,8 +20,8 @@ export function Dashboard() {
   });
 
   return (
-    <main className="flex min-h-screen w-full items-center justify-center">
-      <div className="w-full max-w-3xl space-y-8">
+    <main className="flex w-full flex-1 items-center justify-center overflow-hidden py-12">
+      <div className="w-full max-w-3xl space-y-8 py-24">
         <Title />
         <WeatherSearch onSelectCoordinates={setCoordinates} onSelectCity={setCityName} />
         {isLoading && (

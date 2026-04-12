@@ -10,26 +10,30 @@ export default function CurrentWeather({ data, cityName }: CurrentWeatherProps) 
     <div>
       <h1 className="mb-1.5 text-lg font-medium tracking-wider">Current Weather</h1>
       <div className="grid grid-cols-[repeat(auto-fit,minmax(220px,1fr))] gap-5">
-        <StatsCard icon={<Building size={20} />} title={'City'} content={cityName} />
         <StatsCard
-          icon={<Thermometer size={20} />}
+          icon={<Building className="text-teal-500" size={20} />}
+          title={'City'}
+          content={cityName}
+        />
+        <StatsCard
+          icon={<Thermometer className="text-teal-500" size={20} />}
           title={'Temperature'}
           content={data.current.temperature_2m}
           unit={data.current_units.temperature_2m}
         />
         <StatsCard
-          icon={<CloudRain size={20} />}
+          icon={<CloudRain className="text-teal-500" size={20} />}
           title={'Weather Condition'}
           content={getWeatherCode(data.current.weather_code)}
         />
         <StatsCard
-          icon={<Droplets size={20} />}
+          icon={<Droplets className="text-teal-500" size={20} />}
           title={'Humidity'}
           content={data.current.relative_humidity_2m}
           unit={data.current_units.relative_humidity_2m}
         />
         <StatsCard
-          icon={<Wind size={20} />}
+          icon={<Wind className="text-teal-500" size={20} />}
           title={'Wind'}
           content={data.current.wind_gusts_10m}
           unit={data.current_units.wind_gusts_10m}

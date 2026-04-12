@@ -36,10 +36,10 @@ export default function WeatherSearch({ onSelectCoordinates, onSelectCity }: Wea
   };
 
   return (
-    <div className="relative z-50">
+    <div className="relative z-40">
       {showResults && <div className="fixed inset-0 z-40 bg-black/20 backdrop-blur-sm" />}
       <Command
-        className="relative z-50 mx-auto h-auto w-3/4 overflow-visible rounded-lg border pb-2 shadow-[0_0_10px_rgba(59,130,246,0.35)] ring-1 ring-blue-300/30"
+        className="relative z-40 mx-auto h-auto w-3/4 overflow-visible rounded-lg border pb-2 hover:shadow-[0_0_4px_rgba(59,130,246,0.35)] hover:shadow-teal-500"
         shouldFilter={false}
       >
         <CommandInput
@@ -47,7 +47,7 @@ export default function WeatherSearch({ onSelectCoordinates, onSelectCity }: Wea
           onValueChange={setSearchString}
           placeholder="Type a name of a city to search..."
         />
-        <CommandList className="bg-popover absolute top-full right-0 left-0 z-50 rounded-lg shadow-lg">
+        <CommandList className="bg-popover absolute top-full right-0 left-0 z-40 rounded-lg shadow-lg">
           {!!cityName && !isFetching && data?.results?.length === 0 && (
             <CommandEmpty>No results found.</CommandEmpty>
           )}
