@@ -13,7 +13,7 @@ export default function ForecastCard({
 }: ForecastCardProps) {
   return (
     <Card className="shadow-[0_0_10px_rgba(59,130,246,0.35)] ring-1 ring-blue-300/30">
-      <CardContent className="flex items-center justify-around">
+      <CardContent className="grid grid-cols-[repeat(auto-fit,minmax(220px,1fr))]">
         <div className="text-center">
           <h1 className="text-lg font-semibold">{getDayOfTheWeek(date)}</h1>
           <p className="text-white/50">{date}</p>

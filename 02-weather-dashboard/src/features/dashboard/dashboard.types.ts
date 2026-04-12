@@ -31,7 +31,7 @@ export type ForecastCardProps = {
   weatherCondition: string;
 };
 
-export type Coordinates = Pick<GeoLocation, 'latitude' | 'longitude'>;
+export type Coordinates = Pick<GeoLocation, 'latitude' | 'longitude' | 'timezone'>;
 
 export type WeatherForecast = {
   latitude: number;

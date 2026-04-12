@@ -69,7 +69,7 @@ export default function WeatherSearch({ onSelectCoordinates, onSelectCity }: Wea
                 className="mb-1 rounded-none border-b border-b-slate-700/15"
                 onSelect={() =>
                   handleSelect(
-                    { latitude: c.latitude, longitude: c.longitude },
+                    { latitude: c.latitude, longitude: c.longitude, timezone: c.timezone },
                     c.name + ' - ' + c.country,
                   )
                 }

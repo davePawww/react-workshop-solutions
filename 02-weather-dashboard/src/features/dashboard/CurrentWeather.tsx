@@ -9,7 +9,7 @@ export default function CurrentWeather({ data, cityName }: CurrentWeatherProps) 
   return (
     <div>
       <h1 className="mb-1.5 text-lg font-medium tracking-wider">Current Weather</h1>
-      <div className="grid grid-cols-3 gap-5">
+      <div className="grid grid-cols-[repeat(auto-fit,minmax(220px,1fr))] gap-5">
         <StatsCard icon={<Building size={20} />} title={'City'} content={cityName} />
         <StatsCard
           icon={<Thermometer size={20} />}
